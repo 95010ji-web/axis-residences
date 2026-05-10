@@ -19,6 +19,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const isCrm = pathname.startsWith("/crm");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -42,6 +43,9 @@ export default function Navbar() {
       document.body.style.overflow = "";
     };
   }, [mobileOpen]);
+
+  // Hide on CRM routes (CRM has its own sidebar) — AFTER all hooks
+  if (isCrm) return null;
 
   // Solid bg on all non-home pages OR when scrolled
   const useSolidBg = !isHome || scrolled;

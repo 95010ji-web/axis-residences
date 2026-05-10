@@ -1,7 +1,13 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Building2, Phone, Mail, MapPin } from "lucide-react";
 
 export default function Footer() {
+  const pathname = usePathname();
+  if (pathname.startsWith("/crm")) return null;
+
   return (
     <footer className="bg-earth text-cream">
       <div className="gradient-stripe h-1" />
