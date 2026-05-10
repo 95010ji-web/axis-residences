@@ -147,13 +147,13 @@ export default function LeadDetail({
       </AnimatePresence>
 
       {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-start justify-between gap-4 flex-wrap mb-4">
+      <div className="mb-6 lg:mb-8">
+        <div className="flex items-start justify-between gap-3 flex-wrap mb-4">
           <div>
             <p className="font-caption text-[10px] text-stone tracking-[0.15em] uppercase mb-2">
               Lead · {relativeTime(lead.created_at)}
             </p>
-            <h1 className="font-display text-3xl lg:text-4xl text-earth tracking-tight">
+            <h1 className="font-display text-2xl sm:text-3xl lg:text-4xl text-earth tracking-tight leading-[0.95] break-words">
               {lead.name.toUpperCase()}
             </h1>
           </div>
@@ -166,29 +166,29 @@ export default function LeadDetail({
         </div>
 
         {/* Contact strip */}
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-2 sm:gap-3">
           <a
             href={`mailto:${lead.email}`}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-earth text-cream hover:bg-gold transition-colors"
+            className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-earth text-cream hover:bg-gold transition-colors min-w-0 max-w-full"
           >
-            <Mail className="w-3.5 h-3.5" />
-            <span className="font-mono text-xs">{lead.email}</span>
+            <Mail className="w-3.5 h-3.5 flex-shrink-0" />
+            <span className="font-mono text-[11px] sm:text-xs truncate">{lead.email}</span>
           </a>
           {lead.phone && (
             <a
               href={`tel:${lead.phone}`}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-earth text-cream hover:bg-gold transition-colors"
+              className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-earth text-cream hover:bg-gold transition-colors"
             >
-              <Phone className="w-3.5 h-3.5" />
-              <span className="font-mono text-xs">{lead.phone}</span>
+              <Phone className="w-3.5 h-3.5 flex-shrink-0" />
+              <span className="font-mono text-[11px] sm:text-xs">{lead.phone}</span>
             </a>
           )}
           <button
             onClick={markContacted}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-leaf text-cream hover:bg-moss transition-colors"
+            className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-leaf text-cream hover:bg-moss transition-colors"
           >
-            <CircleCheck className="w-3.5 h-3.5" />
-            <span className="font-mono text-xs tracking-wider uppercase">
+            <CircleCheck className="w-3.5 h-3.5 flex-shrink-0" />
+            <span className="font-mono text-[11px] sm:text-xs tracking-wider uppercase">
               Mark contacted
             </span>
           </button>
@@ -196,7 +196,7 @@ export default function LeadDetail({
       </div>
 
       {/* Two-column layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
         {/* Main column — message + notes */}
         <div className="lg:col-span-2 space-y-6">
           {/* Original message */}

@@ -50,7 +50,7 @@ export default function LeadsTable({ leads }: { leads: Lead[] }) {
   return (
     <div className="space-y-6">
       {/* Filters */}
-      <div className="bg-cream border border-earth/10 p-4 lg:p-6 flex flex-col sm:flex-row gap-3">
+      <div className="bg-cream border border-earth/10 p-3 sm:p-4 lg:p-6 flex flex-col sm:flex-row gap-2 sm:gap-3">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone" />
           <input
@@ -66,7 +66,7 @@ export default function LeadsTable({ leads }: { leads: Lead[] }) {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value as LeadStatus | "all")}
-            className="form-input pr-10 appearance-none cursor-pointer min-w-[180px]"
+            className="form-input pr-10 appearance-none cursor-pointer w-full sm:min-w-[180px]"
           >
             <option value="all">ALL STATUSES</option>
             {(Object.keys(STATUS_META) as LeadStatus[])
@@ -84,7 +84,7 @@ export default function LeadsTable({ leads }: { leads: Lead[] }) {
           <select
             value={priorityFilter}
             onChange={(e) => setPriorityFilter(e.target.value)}
-            className="form-input pr-10 appearance-none cursor-pointer min-w-[140px]"
+            className="form-input pr-10 appearance-none cursor-pointer w-full sm:min-w-[140px]"
           >
             <option value="all">ALL PRIORITY</option>
             <option value="high">HIGH</option>

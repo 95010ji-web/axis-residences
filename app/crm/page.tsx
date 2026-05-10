@@ -67,13 +67,13 @@ export default async function DashboardPage() {
   );
 
   return (
-    <div className="p-6 lg:p-10">
+    <div className="p-4 sm:p-6 lg:p-10">
       {/* Header */}
-      <div className="mb-10">
+      <div className="mb-6 lg:mb-10">
         <p className="font-caption text-[10px] text-stone tracking-[0.15em] uppercase mb-2">
           Dashboard
         </p>
-        <h1 className="font-display text-3xl lg:text-4xl text-earth tracking-tight">
+        <h1 className="font-display text-2xl sm:text-3xl lg:text-4xl text-earth tracking-tight leading-[0.95]">
           GOOD TO SEE YOU,
           <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold to-[#E8B954]">
@@ -83,7 +83,7 @@ export default async function DashboardPage() {
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-6 lg:mb-8">
         <KPI
           label="New Leads"
           value={newLeads}
@@ -119,7 +119,7 @@ export default async function DashboardPage() {
       </div>
 
       {/* Pipeline + Recent in two columns */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
         {/* Pipeline column */}
         <div className="lg:col-span-2">
           <div className="bg-cream border border-earth/10 p-6">
@@ -309,16 +309,16 @@ function KPI({
   subtext: string;
 }) {
   return (
-    <div className="bg-cream border border-earth/10 p-5 relative overflow-hidden">
+    <div className="bg-cream border border-earth/10 p-4 sm:p-5 relative overflow-hidden">
       <div className={`absolute top-0 right-0 w-1 h-full ${accent}`} />
-      <div className="flex items-center justify-between mb-3">
-        <p className="font-caption text-[10px] text-stone tracking-[0.15em] uppercase">
+      <div className="flex items-center justify-between mb-2 sm:mb-3">
+        <p className="font-caption text-[9px] sm:text-[10px] text-stone tracking-[0.12em] uppercase leading-tight">
           {label}
         </p>
-        <Icon className="w-4 h-4 text-stone/50" />
+        <Icon className="w-4 h-4 text-stone/50 flex-shrink-0" />
       </div>
-      <p className="font-display text-3xl text-earth mb-1">{value}</p>
-      <p className="font-mono text-[10px] text-stone tracking-wider">{subtext}</p>
+      <p className="font-display text-2xl sm:text-3xl text-earth mb-1">{value}</p>
+      <p className="font-mono text-[9px] sm:text-[10px] text-stone tracking-wider truncate">{subtext}</p>
     </div>
   );
 }

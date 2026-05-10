@@ -163,7 +163,7 @@ export default function AboutPage() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 sm:gap-8 lg:gap-12 items-start">
             {/* Realtor portrait card */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}

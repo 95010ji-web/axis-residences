@@ -11,37 +11,37 @@ export default function CRMListingsPage() {
   const totalValue = listings.reduce((sum, l) => sum + l.price, 0);
 
   return (
-    <div className="p-6 lg:p-10">
-      <div className="mb-10">
+    <div className="p-4 sm:p-6 lg:p-10">
+      <div className="mb-6 lg:mb-10">
         <p className="font-caption text-[10px] text-stone tracking-[0.15em] uppercase mb-2">
           Listings
         </p>
-        <h1 className="font-display text-3xl lg:text-4xl text-earth tracking-tight">
+        <h1 className="font-display text-2xl sm:text-3xl lg:text-4xl text-earth tracking-tight">
           PROPERTY PORTFOLIO
         </h1>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-4 lg:gap-6 mb-8">
-        <div className="bg-earth text-cream p-5">
-          <p className="font-caption text-[10px] text-cream/50 tracking-[0.15em] uppercase mb-2">
+      <div className="grid grid-cols-3 gap-3 sm:gap-4 lg:gap-6 mb-6 lg:mb-8">
+        <div className="bg-earth text-cream p-3 sm:p-5">
+          <p className="font-caption text-[9px] sm:text-[10px] text-cream/50 tracking-[0.12em] uppercase mb-1.5 sm:mb-2 leading-tight">
             Active Listings
           </p>
-          <p className="font-display text-3xl text-cream">{total}</p>
+          <p className="font-display text-xl sm:text-3xl text-cream">{total}</p>
         </div>
-        <div className="bg-earth text-cream p-5">
-          <p className="font-caption text-[10px] text-cream/50 tracking-[0.15em] uppercase mb-2">
+        <div className="bg-earth text-cream p-3 sm:p-5">
+          <p className="font-caption text-[9px] sm:text-[10px] text-cream/50 tracking-[0.12em] uppercase mb-1.5 sm:mb-2 leading-tight">
             Total Volume
           </p>
-          <p className="font-display text-3xl text-gold">
+          <p className="font-display text-base sm:text-3xl text-gold leading-tight">
             {formatPrice(totalValue)}
           </p>
         </div>
-        <div className="bg-earth text-cream p-5">
-          <p className="font-caption text-[10px] text-cream/50 tracking-[0.15em] uppercase mb-2">
+        <div className="bg-earth text-cream p-3 sm:p-5">
+          <p className="font-caption text-[9px] sm:text-[10px] text-cream/50 tracking-[0.12em] uppercase mb-1.5 sm:mb-2 leading-tight">
             Featured
           </p>
-          <p className="font-display text-3xl text-cream">{featured.length}</p>
+          <p className="font-display text-xl sm:text-3xl text-cream">{featured.length}</p>
         </div>
       </div>
 

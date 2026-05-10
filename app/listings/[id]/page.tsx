@@ -284,7 +284,7 @@ export default function ListingDetailPage() {
               transition={{ duration: 0.6 }}
               className="lg:sticky lg:top-28 h-fit"
             >
-              <div className="bg-earth text-cream p-6 lg:p-8">
+              <div className="bg-earth text-cream p-5 sm:p-6 lg:p-8">
                 <div className="mb-6 pb-6 border-b border-cream/10">
                   <p className="font-caption text-[10px] text-cream/40 tracking-[0.15em] uppercase mb-2">
                     Listed at

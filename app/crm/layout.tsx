@@ -16,10 +16,8 @@ export default async function CRMLayout({
     data: { user },
   } = await supabase.auth.getUser();
 
-  // Login page handles its own (no sidebar)
-  // The middleware also redirects, but this is a defensive guard
   return (
-    <div className="min-h-screen bg-cream-2 flex">
+    <div className="min-h-screen bg-cream-2 lg:flex">
       {user && <Sidebar userEmail={user.email || ""} />}
       <main className="flex-1 min-h-screen overflow-x-hidden">{children}</main>
     </div>

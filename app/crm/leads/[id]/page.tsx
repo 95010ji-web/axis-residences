@@ -32,7 +32,7 @@ export default async function LeadPage({
   const notes = (notesData as LeadNote[]) || [];
 
   return (
-    <div className="p-6 lg:p-10">
+    <div className="p-4 sm:p-6 lg:p-10">
       <Link
         href="/crm/leads"
         className="inline-flex items-center gap-2 font-mono text-xs text-stone hover:text-gold transition-colors tracking-wider uppercase mb-6"

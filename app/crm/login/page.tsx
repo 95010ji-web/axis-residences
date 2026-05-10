@@ -39,7 +39,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen bg-earth flex items-center justify-center p-6 relative overflow-hidden">
+    <div className="min-h-screen bg-earth flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
       {/* Decorative background */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <motion.div
@@ -74,7 +74,7 @@ function LoginForm() {
               <Building2 className="w-6 h-6 text-cream" />
             </motion.div>
           </Link>
-          <h1 className="font-display text-3xl tracking-wider text-cream mb-2">
+          <h1 className="font-display text-2xl sm:text-3xl tracking-wider text-cream mb-2">
             REALTOR WORKSPACE
           </h1>
           <p className="font-caption text-[10px] text-gold tracking-[0.2em] uppercase">
@@ -83,7 +83,7 @@ function LoginForm() {
         </div>
 
         {/* Card */}
-        <div className="bg-cream p-8 lg:p-10 card-shadow">
+        <div className="bg-cream p-6 sm:p-8 lg:p-10 card-shadow">
           <div className="mb-8">
             <p className="font-caption text-[10px] text-stone tracking-[0.15em] uppercase mb-2">
               Sign in to continue

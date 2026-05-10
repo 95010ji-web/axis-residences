@@ -1,8 +1,9 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard,
   Users,
@@ -11,6 +12,8 @@ import {
   LogOut,
   ExternalLink,
   Globe,
+  Menu,
+  X,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase-browser";
 
@@ -24,6 +27,21 @@ const links = [
 export default function Sidebar({ userEmail }: { userEmail: string }) {
   const pathname = usePathname();
   const router = useRouter();
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  // Close drawer on route change
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
+  // Lock body scroll when mobile drawer open
+  useEffect(() => {
+    if (mobileOpen) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
 
   const signOut = async () => {
     const supabase = createClient();
@@ -32,8 +50,8 @@ export default function Sidebar({ userEmail }: { userEmail: string }) {
     router.refresh();
   };
 
-  return (
-    <aside className="hidden lg:flex flex-col w-64 bg-earth text-cream h-screen sticky top-0 border-r border-cream/10">
+  const SidebarBody = (
+    <>
       {/* Brand */}
       <div className="p-6 border-b border-cream/10">
         <Link href="/crm" className="flex items-center gap-2 group">
@@ -56,7 +74,7 @@ export default function Sidebar({ userEmail }: { userEmail: string }) {
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 p-4 space-y-1">
+      <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
         {links.map((link, i) => {
           const isActive =
             link.href === "/crm"
@@ -77,7 +95,7 @@ export default function Sidebar({ userEmail }: { userEmail: string }) {
                     : "text-cream/60 hover:text-cream hover:bg-cream/5"
                 }`}
               >
-                <link.icon className="w-4 h-4" />
+                <link.icon className="w-4 h-4 flex-shrink-0" />
                 <span className="font-mono text-xs tracking-wider uppercase">
                   {link.label}
                 </span>
@@ -93,7 +111,7 @@ export default function Sidebar({ userEmail }: { userEmail: string }) {
           href="/"
           className="flex items-center gap-2 px-3 py-2 text-cream/40 hover:text-gold transition-colors mb-3"
         >
-          <Globe className="w-3.5 h-3.5" />
+          <Globe className="w-3.5 h-3.5 flex-shrink-0" />
           <span className="font-caption text-[10px] tracking-[0.15em] uppercase">
             View public site
           </span>
@@ -111,12 +129,87 @@ export default function Sidebar({ userEmail }: { userEmail: string }) {
           onClick={signOut}
           className="w-full flex items-center gap-2 px-3 py-2 text-cream/60 hover:text-terracotta hover:bg-terracotta/10 transition-colors"
         >
-          <LogOut className="w-3.5 h-3.5" />
+          <LogOut className="w-3.5 h-3.5 flex-shrink-0" />
           <span className="font-mono text-xs tracking-wider uppercase">
             Sign out
           </span>
         </button>
       </div>
-    </aside>
+    </>
   );
+
+  return (
+    <>
+      {/* Desktop sidebar */}
+      <aside className="hidden lg:flex flex-col w-64 bg-earth text-cream h-screen sticky top-0 border-r border-cream/10">
+        {SidebarBody}
+      </aside>
+
+      {/* Mobile top bar */}
+      <div className="lg:hidden sticky top-0 z-40 bg-earth text-cream border-b border-cream/10 flex items-center justify-between px-4 py-3">
+        <Link href="/crm" className="flex items-center gap-2">
+          <div className="w-8 h-8 bg-gold flex items-center justify-center">
+            <Building2 className="w-4 h-4 text-cream" />
+          </div>
+          <div className="flex flex-col">
+            <span className="font-display text-sm tracking-wider text-cream leading-none">
+              AXIS · CRM
+            </span>
+            <span className="font-caption text-[8px] tracking-[0.15em] text-gold/80 uppercase mt-0.5">
+              {currentLabel(pathname)}
+            </span>
+          </div>
+        </Link>
+        <button
+          onClick={() => setMobileOpen(true)}
+          aria-label="Open menu"
+          className="w-10 h-10 flex items-center justify-center hover:bg-cream/5"
+        >
+          <Menu className="w-5 h-5" />
+        </button>
+      </div>
+
+      {/* Mobile drawer */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setMobileOpen(false)}
+              className="lg:hidden fixed inset-0 z-50 bg-obsidian/60 backdrop-blur-sm"
+            />
+            {/* Drawer */}
+            <motion.aside
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "spring", damping: 28, stiffness: 280 }}
+              className="lg:hidden fixed top-0 left-0 bottom-0 z-50 w-[85vw] max-w-xs bg-earth text-cream flex flex-col overflow-hidden"
+            >
+              <button
+                onClick={() => setMobileOpen(false)}
+                aria-label="Close menu"
+                className="absolute top-4 right-4 w-9 h-9 flex items-center justify-center text-cream/60 hover:text-cream hover:bg-cream/5 z-10"
+              >
+                <X className="w-5 h-5" />
+              </button>
+              {SidebarBody}
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
+
+function currentLabel(pathname: string): string {
+  if (pathname === "/crm") return "Dashboard";
+  if (pathname.startsWith("/crm/leads")) return "Leads";
+  if (pathname.startsWith("/crm/tasks")) return "Tasks";
+  if (pathname.startsWith("/crm/listings")) return "Listings";
+  return "Workspace";
 }

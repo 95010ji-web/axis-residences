@@ -26,12 +26,12 @@ export default async function TasksPage() {
   );
 
   return (
-    <div className="p-6 lg:p-10">
-      <div className="mb-10">
+    <div className="p-4 sm:p-6 lg:p-10">
+      <div className="mb-6 lg:mb-10">
         <p className="font-caption text-[10px] text-stone tracking-[0.15em] uppercase mb-2">
           Tasks
         </p>
-        <h1 className="font-display text-3xl lg:text-4xl text-earth tracking-tight">
+        <h1 className="font-display text-2xl sm:text-3xl lg:text-4xl text-earth tracking-tight">
           FOLLOW-UPS
         </h1>
       </div>
