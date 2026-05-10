@@ -4,6 +4,45 @@ A premium real estate website built with Next.js 14, Tailwind CSS, Framer Motion
 
 ---
 
+## 🔐 CRM access — `/crm`
+
+A full internal CRM is now live at `/crm`. Sign in to manage leads from the contact form.
+
+**Admin login**
+- URL: `https://your-vercel-url/crm/login`
+- Email: `gunavjander@axisresidences.com`
+- Password: `AxisAdmin2026!` *(change this immediately after first login at Supabase Dashboard → Authentication → Users)*
+
+**What you can do in the CRM**
+
+| Page | What it shows |
+|---|---|
+| `/crm` (Dashboard) | KPI cards (new leads, active pipeline, follow-ups due, closed won), pipeline breakdown by stage, high-priority alerts, recent submissions |
+| `/crm/leads` | Searchable, filterable table of every form submission. Filter by status (New → Contacted → Qualified → Showing → Offer → Won/Lost) or priority |
+| `/crm/leads/[id]` | Full lead detail: original message, activity log (notes you add over time), status flow stepper, priority selector, follow-up date picker, internal notes |
+| `/crm/tasks` | Overdue + upcoming follow-ups based on `next_followup_at` dates you set |
+| `/crm/listings` | Read-only overview of all 8 properties with portfolio totals |
+
+**Tech**
+- Auth: Supabase Auth (email/password) — sessions in cookies, refreshed by middleware
+- Database: 3 tables — `contact_submissions` (extended with status fields), `lead_notes`, `lead_tasks`
+- RLS: Anonymous users can INSERT only (form). Authenticated users have full SELECT/UPDATE on contact_submissions and full access to notes/tasks
+- Routes: All `/crm/*` paths protected by `middleware.ts` — unauthenticated users redirected to `/crm/login`
+
+**Adding more team members later**
+
+```bash
+# In Supabase dashboard → Authentication → Users → Add User
+# Or via API:
+curl -X POST "https://nbqzycwqfhwopnwpjhxm.supabase.co/auth/v1/admin/users" \
+  -H "apikey: <SERVICE_ROLE_KEY>" \
+  -H "Authorization: Bearer <SERVICE_ROLE_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{"email":"agent@axisresidences.com","password":"...","email_confirm":true}'
+```
+
+---
+
 ## ✅ What's already done
 
 ### Backend (Supabase) — fully wired
